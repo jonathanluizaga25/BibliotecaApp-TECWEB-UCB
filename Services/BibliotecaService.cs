@@ -68,4 +68,48 @@ public List<Libro> ObtenerLibrosDisponibles()
 
 
 
+
+
+
+public List<Libro> BuscarPorAutor(string autor)
+{
+    return libros
+        .Where(l => l.Autor.Contains(
+            autor,
+            StringComparison.OrdinalIgnoreCase
+        ))
+        .ToList();
 }
+
+
+public List<Libro> BuscarPorCategoria(string categoria)
+{
+    return libros
+        .Where(l => l.Categoria.Contains(
+            categoria,
+            StringComparison.OrdinalIgnoreCase
+        ))
+        .ToList();
+}
+
+
+public void EliminarLibro(string codigo)
+{
+    Libro? libro = BuscarLibroPorCodigo(codigo);
+
+    if (libro == null)
+    {
+        throw new InvalidOperationException(
+            "El libro no existe."
+        );
+    }
+
+    libros.Remove(libro);
+}
+
+
+
+}
+
+
+
